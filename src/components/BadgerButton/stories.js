@@ -28,11 +28,11 @@ storiesOf('BadgerButton', module)
 		'default',
 		() => (
 			<BadgerButton
-				price={number('Price', 0.0025)}
+				price={number('Price', 0.05)}
 				currency={select('Currency', currencyOptions, 'USD')}
 				to={text(
 					'To Address',
-					'bitcoincash:pp8skudq3x5hzw8ew7vzsw8tn4k8wxsqsv0lt0mf3g'
+					'bitcoincash:qppc593r2hhksvrz5l77n5yd6usrj74waqnqemgjgf'
 				)}
 				opReturn={array('OP_RETURN', [])}
 				successFn={() => console.log('success example function called')}

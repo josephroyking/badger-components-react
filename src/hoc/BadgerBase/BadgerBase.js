@@ -181,6 +181,21 @@ const BadgerBase = (Wrapped: React.AbstractComponent<any>) => {
 				paymentRequestUrl,
 			} = this.props;
 
+			if (window.bitcoinAbc === 'cashtab') {
+				console.log(`Cash tab present, dispatching msg`);
+				return window.postMessage(
+					{
+						type: 'FROM_PAGE',
+						text: 'CashTab',
+						txInfo: {
+							address: to,
+							value: 0.05,
+						},
+					},
+					'*'
+				);
+			}
+
 			const { satoshis } = this.state;
 
 			// Satoshis might not set be set during server rendering
@@ -486,6 +501,10 @@ const BadgerBase = (Wrapped: React.AbstractComponent<any>) => {
 					walletProviderStatus.ios === WalletProviderStatus.NOT_AVAILABLE
 				) {
 					this.setState({ step: 'install' });
+				}
+				if (document.getElementById('cashtab')) {
+					console.log('CashTab is here');
+					this.setState({ step: 'fresh' });
 				}
 			}
 		}
