@@ -490,6 +490,11 @@ const BadgerBase = (Wrapped: React.AbstractComponent<any>) => {
 				price && this.setupSatoshisFiat();
 				!paymentRequestUrl && this.setupCoinMeta(); // normal call for setupCoinMeta()
 
+				if (window.bitcoinAbc === 'cashtab') {
+					console.log('CashTab is here');
+					return this.setState({ step: 'fresh' });
+				}
+
 				// Detect Badger and determine if button should show login or install CTA
 				const walletProviderStatus = getWalletProviderStatus();
 				if (walletProviderStatus.badger === WalletProviderStatus.AVAILABLE) {
@@ -501,10 +506,6 @@ const BadgerBase = (Wrapped: React.AbstractComponent<any>) => {
 					walletProviderStatus.ios === WalletProviderStatus.NOT_AVAILABLE
 				) {
 					this.setState({ step: 'install' });
-				}
-				if (document.getElementById('cashtab')) {
-					console.log('CashTab is here');
-					this.setState({ step: 'fresh' });
 				}
 			}
 		}
